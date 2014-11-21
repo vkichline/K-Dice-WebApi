@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22310.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{44DC0BF2-8FC5-4BD1-A9C2-F4BD036615DA}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DiceApi", "src\DiceApi\DiceApi.kproj", "{2888FDDC-EE5F-49A0-80A6-474CD014BF38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2FEF6DAE-CFB4-4977-A4AA-6F5CDD6547FD}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2888FDDC-EE5F-49A0-80A6-474CD014BF38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2888FDDC-EE5F-49A0-80A6-474CD014BF38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2888FDDC-EE5F-49A0-80A6-474CD014BF38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2888FDDC-EE5F-49A0-80A6-474CD014BF38}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2888FDDC-EE5F-49A0-80A6-474CD014BF38} = {44DC0BF2-8FC5-4BD1-A9C2-F4BD036615DA}
+	EndGlobalSection
+EndGlobal

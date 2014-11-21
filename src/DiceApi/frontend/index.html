@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>Dice</title>
+    <script src="dice.js"></script>
+    <link href="dice.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Dice</h1>
+        </div>
+
+        <div class=" ng-cloak row">
+            <div ng-controller="diceCtrl">
+                <form role="form" name="settingsForm" class="paramForm" novalidate>
+                    <label class="control-label">Dice</label>
+                    <input name="diceInput" class="paramForm" type="number" min="1" max="32" required ng-model="dice" />
+                    <label>Sides</label>
+                    <input name="sidesInput" class="paramForm" type="number" min="2" max="32" required ng-model="sides" />
+
+                    <button type="submit" class="btn btn-lg btn-default" id="SubmitButton" ng-disabled="settingsForm.$invalid" ng-click="rollDice()">Roll</button>
+
+                    <div ng-show="settingsForm.$invalid">
+                        <br />
+                        <div class="text-danger" ng-show="settingsForm.diceInput.$dirty && settingsForm.diceInput.$invalid">'dice' must be between 1 and 32</div>
+                        <div class="text-danger" ng-show="settingsForm.sidesInput.$dirty && settingsForm.sidesInput.$invalid">'sides' must be between 2 and 32</div>
+                    </div>
+                </form>
+
+                <hr />
+
+                <ul class="resultList" ng-show="results.errorMessage.length == 0">
+                    <li ng-repeat="result in results.data">{{result.value}}</li>
+                </ul>
+                <div ng-show="results.errorMessage.length != 0">
+                    {{results.errorMessage}}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿@import '../bower_components/bootstrap-less/less/bootstrap';
+
+/* 
+  Allow angular.js to be loaded in body, hiding cloaked elements until 
+  templates compile.  The !important is important given that there may be 
+  other selectors that are more specific or come later and might alter display.  
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}
+
+.resultList {
+    list-style: none;
+    font-size: xx-large;
+}
+
+body {
+    margin: 1em;
+}
+
+.paramForm {
+    font-size: 1.3em;
+    padding-left: 1em;
+}
+
+.paramForm input {
+    height: 1.8em;
+    width: 3em;
+    margin-right: 1em;
+    padding: 3px;
+    border: 1px solid #c0c0c0;
+}
+
+.paramForm label {
+    font-weight: normal;
+    font-size: 1.3em;
+    padding-right: 8px;
+}
