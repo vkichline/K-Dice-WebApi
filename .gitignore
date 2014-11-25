@@ -52,6 +52,8 @@ build/
 bower_components/
 node_modules/
 wwwroot/
+DiceApi.sln.ide/
+artifacts/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
