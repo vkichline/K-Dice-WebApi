@@ -1,10 +1,8 @@
-/// <binding BeforeBuild='build' ProjectOpened='watch' />
 module.exports = function (grunt) {
     grunt.initConfig({
         uglify: {
             app: {
                 options: {
-                    sourceMap: true,
                     compress: {
                         drop_console: true
                     }
@@ -16,39 +14,46 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            output: ['wwwroot/**/*.*'],
+            output: ['wwwroot/**/*'],
             scorch: ['wwwroot/**/*', 'bower_components/', 'node_modules/']
         },
         less: {
-            options: {
-                compress: true,
-                sourceMap: true,
-                sourceMapFilename: 'wwwroot/dice.css.map'
+            retail: {
+                options: {
+                    compress: true
+                },
+                files: {
+                    'wwwroot/dice.css': 'frontend/dice.less'
+                }
             },
-            bootstrap: {
+            debug: {
+                options: {
+                    compress: false,
+                    sourceMap: false
+                },
                 files: {
                     'wwwroot/dice.css': 'frontend/dice.less'
                 }
             }
         },
-        watch: {
-            less: {
-                files: ["frontend/**/*.less"],
-                tasks: ["less"]
-            },
-            gruntfile: {
-                files: ['Gruntfile.js', 'frontend/**/*.js'],
-                tasks: ["jshint"]
-            },
-            js: {
-                files: ['frontend/**/*.js'],
-                tasks: ["jshint", "uglify:app"]
-            },
-            html: {
-                files: ['frontend/**/*.html'],
-                tasks: ['htmlmin:html']
-            }
-        },
+        //watch: {
+        //    less: {
+        //        files: ["frontend/**/*.less"],
+        //        tasks: ["less"]
+        //    },
+        //    gruntfile: {
+        //        files: ['Gruntfile.js', 'frontend/**/*.js'],
+        //        tasks: ["jshint"]
+        //    },
+        //    js: {
+        //        files: ['frontend/**/*.js'],
+        //        tasks: ["jshint", "uglify:app"]
+        //    },
+        //    html: {
+        //        files: ['frontend/**/*.html'],
+        //        tasks: ['htmlmin:html']
+        //    }
+        //},
         jshint: {
             options: {
                 reporter: require('jshint-stylish')
@@ -62,6 +67,12 @@ module.exports = function (grunt) {
                 src: '*.html',
                 dest: 'wwwroot/',
                 flatten: true
+            },
+            ng: {
+                expand: true,
+                flatten: true,
+                src: ['bower_components/angular/angular.js', 'frontend/app/app.js', 'frontend/app/diceCtrl.js'],
+                dest: 'wwwroot/js/'
             }
         },
         htmlmin: {
@@ -71,14 +82,23 @@ module.exports = function (grunt) {
                     collapseWhitespace: true
                 },
                 files: {
-                    'wwwroot/index.html': 'frontend/index.html'
+                    'wwwroot/index.html': 'wwwroot/index.html'
+                }
+            }
+        },
+        processhtml: {
+            retail: {
+                files: {
+                    'wwwroot/index.html': ['frontend/index.html']
                 }
             }
         }
 
     });
 
-    grunt.registerTask('build', ['clean:output', 'htmlmin:html', 'uglify:app', 'less:bootstrap']);
+    grunt.registerTask('build-retail', ['clean:output', 'processhtml:retail', 'htmlmin:html', 'uglify:app', 'less:retail']);
+    grunt.registerTask('build-debug', ['clean:output', 'copy', 'less:debug']);
+
 
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-htmlmin");
@@ -87,4 +107,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-less");
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-watch");
+    grunt.loadNpmTasks("grunt-processhtml");
 };
