@@ -11,6 +11,7 @@
         "grunt-contrib-watch": "^0.6.1",
         "grunt-contrib-jshint": "~0.10.0",
         "jshint-stylish": "~1.0.0",
-        "grunt-processhtml": "~0.3.3"
+        "grunt-processhtml": "~0.3.3",
+        "grunt-cache-bust": "~0.4.5"
     }
 }

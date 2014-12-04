@@ -15,7 +15,8 @@ module.exports = function (grunt) {
         },
         clean: {
             output: ['wwwroot/**/*'],
-            scorch: ['wwwroot/**/*', 'bower_components/', 'node_modules/']
+            scorch: ['wwwroot/**/*', 'bower_components/', 'node_modules/'],
+            postCacheBust: ['wwwroot/dice.css', 'wwwroot/dice.js']
         },
         less: {
             retail: {
@@ -91,11 +92,17 @@ module.exports = function (grunt) {
                     'wwwroot/index.html': ['frontend/index.html']
                 }
             }
+        },
+        cacheBust: {
+            assets: {
+                files: {
+                    src: ['wwwroot/index.html']
+                }
+            }
         }
-
     });
 
-    grunt.registerTask('build-retail', ['clean:output', 'processhtml:retail', 'htmlmin:html', 'uglify:app', 'less:retail']);
+    grunt.registerTask('build-retail', ['clean:output', 'processhtml:retail', 'htmlmin:html', 'uglify:app', 'less:retail', 'cacheBust', 'clean:postCacheBust']);
     grunt.registerTask('build-debug', ['clean:output', 'copy', 'less:debug']);
 
 
@@ -107,4 +114,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-jshint");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-processhtml");
+    grunt.loadNpmTasks("grunt-cache-bust");
 };
