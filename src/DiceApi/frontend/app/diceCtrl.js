@@ -32,10 +32,10 @@
         });
 
         $scope.rollDice = function () {
-            GetData($scope.dice, $scope.sides);
+            return getData($scope.dice, $scope.sides);
         };
 
-        function GetData(dice, sides) {
+        function getData(dice, sides) {
             $http.get(dataUrl + 'api/dice/' + dice + '/' + sides)
                 .success(function (data, status, headers, config) {
                     $scope.results.errorMessage = "";

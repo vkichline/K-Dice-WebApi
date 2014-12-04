@@ -36,29 +36,30 @@ module.exports = function (grunt) {
                 }
             }
         },
-        //watch: {
-        //    less: {
-        //        files: ["frontend/**/*.less"],
-        //        tasks: ["less"]
-        //    },
-        //    gruntfile: {
-        //        files: ['Gruntfile.js', 'frontend/**/*.js'],
-        //        tasks: ["jshint"]
-        //    },
-        //    js: {
-        //        files: ['frontend/**/*.js'],
-        //        tasks: ["jshint", "uglify:app"]
-        //    },
-        //    html: {
-        //        files: ['frontend/**/*.html'],
-        //        tasks: ['htmlmin:html']
-        //    }
-        //},
+        // NOTE: watch assumes debug build
+        watch: {
+            less: {
+                files: ["frontend/**/*.less"],
+                tasks: ["less:debug"]
+            },
+            gruntfile: {
+                files: ['Gruntfile.js', 'frontend/**/*.js'],
+                tasks: ["jshint"]
+            },
+            js: {
+                files: ['frontend/**/*.js'],
+                tasks: ["jshint", "copy:js"]
+            },
+            html: {
+                files: ['frontend/**/*.html'],
+                tasks: ['copy:html']
+            }
+        },
         jshint: {
             options: {
                 reporter: require('jshint-stylish')
             },
-            all: ['Gruntfile.js', 'wwwroot/js/**/*.js', '!wwwroot/js/ng.js']
+            all: ['Gruntfile.js', 'frontend/**/*.js']
         },
         copy: {
             html: {
@@ -68,13 +69,14 @@ module.exports = function (grunt) {
                 dest: 'wwwroot/',
                 flatten: true
             },
-            ng: {
+            js: {
                 expand: true,
                 flatten: true,
                 src: ['bower_components/angular/angular.js', 'frontend/app/app.js', 'frontend/app/diceCtrl.js'],
                 dest: 'wwwroot/js/'
             }
         },
+        // Minifies index.html in place, after processhtml has fixed up includes based on comments
         htmlmin: {
             html: {
                 options: {
@@ -86,6 +88,7 @@ module.exports = function (grunt) {
                 }
             }
         },
+        // Replaces groups of include statements with a single statement for bundling.
         processhtml: {
             retail: {
                 files: {
