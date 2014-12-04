@@ -42,10 +42,6 @@ module.exports = function (grunt) {
                 files: ["frontend/**/*.less"],
                 tasks: ["less:debug"]
             },
-            gruntfile: {
-                files: ['Gruntfile.js', 'frontend/**/*.js'],
-                tasks: ["jshint"]
-            },
             js: {
                 files: ['frontend/**/*.js'],
                 tasks: ["jshint", "copy:js"]
